@@ -17,6 +17,7 @@
     "prespecs": "npm run webdriver:terminate-all",
     "webdriver:update": "webdriver update",
     "webdriver:terminate-all": "ps x | grep chromedriver | grep -v grep | awk '{print $1}' | xargs kill -2; ps x | grep chromedriver | grep -v grep; test $? -eq 1",
+    "reports": "budo --dir ./reports/e2e --open",
     "lint": "eslint .{,/**}/*.js"
   },
   "repository": {
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.8",
+    "budo": "^11.3.2",
     "eslint": "^5.3.0"
   }
 }
