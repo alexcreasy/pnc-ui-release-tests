@@ -1,6 +1,6 @@
-const JasmineReporters = require('jasmine-reporters');
 const testSuites = require('./suites.json');
 const testParams = require('./params');
+const onPrepareFn = require('./tests/onPrepare');
 
 
 exports.config = {
@@ -19,12 +19,7 @@ exports.config = {
         showColors: true,
         defaultTimeoutInterval: 10 * 60 * 1000
     },
-    onPrepare: () => {        
-        jasmine.getEnv().addReporter(new JasmineReporters.JUnitXmlReporter({
-            savePath: 'reports',
-            consolidateAll: false
-        }));
-    },
+    onPrepare: onPrepareFn,
     params: testParams,
     plugins: [
         {

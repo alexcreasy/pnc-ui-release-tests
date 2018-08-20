@@ -27,9 +27,22 @@ class ProjectDetailPage extends Page {
     async openWizard() {
         const modal = new BuildConfigCreateModal(this.createBuildConfigButton);
 
-        await modal.getTitle();
+        await modal.open();
 
         return modal;
+    }
+
+    /**
+     * 
+     * @param {Object} properties
+     * @param {string} properties.name
+     * @returns {Promise<void>} 
+     * @async
+     */
+    async createBuildConfig(properties) {
+        const { name } = properties;
+
+        const wizard = await this.openWizard();
     }
 }
 

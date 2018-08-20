@@ -1,7 +1,6 @@
 const PATH_PREFIX = '#';
 const LOGIN_TIMEOUT = 20000;
 
-
 /**
  * Base class for other page objects to extend.
  */
@@ -20,6 +19,10 @@ class Page {
         }
         
         this.url = `${browser.params.pncUiAddress}${fullPath}`;
+
+        
+        this.loginButton = element(by.id('login-button'));
+        this.loggedInUser = element(by.binding('authCtrl.username'));
     }
 
     /**
@@ -46,28 +49,18 @@ class Page {
      * @async
      * @returns {void}
      */
-    async login() {
-        const redirectUrl = await browser.driver.getCurrentUrl();
-        
+    async login() {       
         await browser.waitForAngularEnabled(false);
-        await element(by.id('login-link')).click();
+        
+        await this.loginButton.click();
 
-        await browser.wait(protractor.ExpectedConditions.urlContains(browser.params.keycloakAddress), LOGIN_TIMEOUT);
+        await browser.wait(conditions.urlContains(browser.params.keycloakAddress), LOGIN_TIMEOUT);
 
         await element(by.id('username')).sendKeys(browser.params.pncUser);
         await element(by.id('password')).sendKeys(browser.params.pncPassword);
         await element(by.id('kc-login')).click();
 
-        
-        /* 
-         * Fix for: "Cannot read property '$$testability' of undefined" error
-         * when redirecting from keycloak to pnc.
-         * 
-         * Fix found here: https://azevedorafaela.wordpress.com/tag/cannot-read-property-testability-of-undefined/
-         */ 
-        await browser.driver.get('about:blank');
         await browser.waitForAngularEnabled(true);
-        await browser.get(redirectUrl);
     }
 }
 

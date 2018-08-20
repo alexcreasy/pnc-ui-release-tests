@@ -18,7 +18,7 @@ describe('A page', () => {
     it('should be able to login', async () => {
         await page.login();
 
-        const text = await element(by.binding('authCtrl.username')).getText();
+        const text = await page.loggedInUser.getText();
 
         expect(text).toEqual(browser.params.pncUser);
     });

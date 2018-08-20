@@ -1,5 +1,3 @@
-const expect = protractor.ExpectedConditions;
-
 class Modal {
 
     /**
@@ -8,7 +6,7 @@ class Modal {
      */
     constructor(openButton) {
         this.openButton = openButton;
-        this.title = $('modal-title');
+        this.title = $('div.modal.in').$('.modal-title');
     }
 
     /**
@@ -17,14 +15,7 @@ class Modal {
      */
     async open() {
         await this.openButton.click();
-    }
-
-    /**
-     * @async
-     * @returns {Promise<void>}
-     */
-    async getTitle() {
-        await browser.wait(expect.visibilityOf(this.title), 5000);
+        await browser.wait(conditions.visibilityOf(this.title), 5000);
     }
 }
 

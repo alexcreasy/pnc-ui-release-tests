@@ -7,14 +7,12 @@ describe('Release Test Scenario #1 [Create simple BC & run build]:', () => {
 
         beforeAll(async () => {
             await projectDetailPage.goto(7);
-            await projectDetailPage.login();
-            await projectDetailPage.goto(7);
         });
 
         it('should be able to open the BC Create wizard', async () => {
             const wizard = await projectDetailPage.openWizard();
 
-            const title = await wizard.getTitle();
+            const title = await wizard.title.getText();
 
             expect(title).toEqual('Create Build Config');
         });
