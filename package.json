@@ -1,0 +1,12 @@
+{
+  "name": "pnc-ui-release-tests",
+  "version": "2.1.0",
+  "description": "Release tests for PNC UI",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Creasy <acreasy@redhat.com>",
+  "license": "Apache-2.0"
+}
