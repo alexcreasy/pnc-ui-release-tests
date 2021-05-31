@@ -110,10 +110,15 @@ describe('Test Scenario 1: Create a simple BuildConfig & execute a build', () =>
         const buildId = await bcDetailPage.startBuild();
         const buildDetailPage = new BuildDetailPage(page, buildId);
         await buildDetailPage.goto();
+
+        //TODO: Verify live log works
+
         await buildDetailPage.waitForBuildToComplete(1000 * 60 * 10);
         const finalStatus = await buildDetailPage.getBuildStatusText();
 
         expect(finalStatus).toEqual('SUCCESS');
+
+        //TODO: Verify correct artifacts are produced.
 
      }, 1000 * 60 * 12);
 
